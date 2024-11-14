@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "date-fns": "^4.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^6.28.0",
     "react-scripts": "^5.0.1",
     "sass": "^1.80.7",
+    "swr": "^2.2.5",
     "un": "0.0.0",
     "webpack": "^5.96.1"
   },
@@ -32,7 +35,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
+    "devDependencies": {
     "eslint-config-react-app": "^4.0.1"
   }
 }
