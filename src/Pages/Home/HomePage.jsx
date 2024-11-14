@@ -19,10 +19,11 @@ function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [allItems, setAllItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
 
   // SWR fetch for SpaceX data
   const { data, error, isValidating, isLoading } = useSWR(
-    `https://api.spacexdata.com/v3/launches?limit=10&offset=${index * 10}}`,
+    `https://api.spacexdata.com/v3/launches?limit=10&offset=${index * 10}`,
     fetcher,
     { revalidateOnFocus: false }
   );
@@ -35,9 +36,9 @@ function HomePage() {
 
   // To Fetch more data when scrolled to bottom
   const fetchMoreData = useCallback(() => {
-    if (isValidating || !data) return;
+    if (isValidating || !data || !hasMore) return; // Prevent fetch if no more data
     setIndex((prevIndex) => prevIndex + 1);
-  }, [data, isValidating]);
+  }, [data, isValidating, hasMore]);
 
   // Scroll event handler to trigger infinite scroll
   useEffect(() => {
@@ -59,6 +60,7 @@ function HomePage() {
   useEffect(() => {
     if (data) {
       setAllItems((prevItems) => [...prevItems, ...data]); // Append new data to the list
+      setHasMore(data.length === 10); // Check if we got less than requested (10 items)
     }
   }, [data]);
 
@@ -113,11 +115,11 @@ function HomePage() {
             margin: '10px 0px',
           }}
         />
-
         {filteredItems.map((item) => (
           <ProductCard data={item} key={item.flight_number} />
         ))}
         {isLoading && <Loader />}
+        {!hasMore && <p>End of List.</p>}{' '}
       </div>
     </div>
   );

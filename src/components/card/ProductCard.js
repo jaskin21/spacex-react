@@ -11,14 +11,14 @@ const ProductCard = ({ data }) => {
     launch_success,
     launch_date_utc,
     mission_name,
-    links: { video_link, article_link },
+    links: { video_link, article_link, flickr_images },
     details,
   } = data;
 
   // Format the launch date
   const date = parseISO(launch_date_utc);
 
-  console.log(data);
+  console.log(flickr_images[0]);
 
   return (
     <div
@@ -125,30 +125,58 @@ const ProductCard = ({ data }) => {
           }}
         >
           {/* Image taking 25% of the width */}
-          <img
-            src='https://via.placeholder.com/150' // Replace with the actual image URL
-            alt='Description'
-            style={{
-              width: '25%',
-              height: '100%',
-              objectFit: 'cover',
-              borderRadius: '6px',
-              marginRight: '16px', // Space between image and details
-            }}
-          />
-
-          {/* Details taking 75% of the width */}
-          <div style={{ width: '75%' }}>
+          {flickr_images[0] ? (
+            <img
+              src={flickr_images[0]}
+              alt='SpaceX launch rocket in the sky' // Provide a meaningful description
+              style={{
+                width: '25%',
+                height: '25%',
+                objectFit: 'cover',
+                borderRadius: '6px',
+                marginRight: '16px',
+                margin: '10px 0px',
+                border: '1px solid greeen',
+              }}
+            />
+          ) : (
             <p
               style={{
                 color: '#555',
-                margin: 0,
+                margin: '10px',
                 fontSize: '14px',
                 textAlign: 'justify',
               }}
             >
-              {details ?? 'No Details'}
+              No image yet
             </p>
+          )}
+
+          {/* Details taking 75% of the width */}
+          <div style={{ width: '75%' }}>
+            {details ? (
+              <p
+                style={{
+                  color: '#555',
+                  margin: '0px 10px',
+                  fontSize: '14px',
+                  textAlign: 'justify',
+                }}
+              >
+                {details}
+              </p>
+            ) : (
+              <p
+                style={{
+                  color: '#555',
+                  margin: '10px',
+                  fontSize: '14px',
+                  textAlign: 'justify',
+                }}
+              >
+                'No Details yet'
+              </p>
+            )}
           </div>
         </div>
       )}
