@@ -4,11 +4,13 @@
   "private": true,
   "dependencies": {
     "date-fns": "^4.1.0",
+    "eslint": "^9.14.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^6.28.0",
     "react-scripts": "^5.0.1",
-    "sass": "^1.80.7",
+    "sass": "^1.81.0",
+    "sass-loader": "^16.0.3",
     "swr": "^2.2.5",
     "un": "0.0.0",
     "webpack": "^5.96.1"
@@ -21,7 +23,9 @@
     "lint": "eslint 'src/*/**/*.{js,jsx}'"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app"
+    ]
   },
   "browserslist": {
     "production": [
@@ -35,7 +39,8 @@
       "last 1 safari version"
     ]
   },
-    "devDependencies": {
-    "eslint-config-react-app": "^4.0.1"
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "eslint-config-react-app": "^7.0.1"
   }
 }

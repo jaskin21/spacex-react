@@ -13,6 +13,7 @@ function App() {
         <Suspense fallback={<Spinner />}>
           <Routes>
             <Route path='/' element={<HomePage />} />
+            <Route path='*' element={<HomePage />} />
           </Routes>
         </Suspense>
       </div>
